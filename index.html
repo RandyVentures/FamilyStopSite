@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FamilyStop — Family-friendly stops, mapped and verified</title>
+    <meta name="description" content="FamilyStop helps families find verified restrooms, changing tables, nursing rooms, playgrounds, and stroller-friendly stops on every trip." />
+    <meta name="theme-color" content="#16a34a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#052e16" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content="FamilyStop — Family-friendly stops, mapped and verified" />
+    <meta property="og:description" content="Family restrooms, changing tables, nursing rooms, and playgrounds — verified by parents, mapped for every trip." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2C10.5 2 6 6.5 6 12c0 8 10 18 10 18s10-10 10-18c0-5.5-4.5-10-10-10Z' fill='%2316a34a'/%3E%3Cpath d='M11 12l3 3 7-6' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --bg: #f4fbf7;
+        --bg-2: #e8f5ed;
+        --surface: #ffffff;
+        --surface-2: #f0f9f3;
+        --green: #16a34a;
+        --green-deep: #166534;
+        --teal: #0d9488;
+        --ink: #0a2018;
+        --muted: #4b6b52;
+        --line: rgba(22, 101, 52, 0.14);
+        --line-strong: rgba(22, 101, 52, 0.22);
+        --shadow: 0 24px 60px -28px rgba(10, 60, 32, 0.5);
+        --shadow-sm: 0 8px 24px -16px rgba(10, 60, 32, 0.45);
+        --radius: 18px;
+        --header-bg: rgba(244, 251, 247, 0.72);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #052e16;
+          --bg-2: #071f0f;
+          --surface: rgba(255, 255, 255, 0.05);
+          --surface-2: rgba(255, 255, 255, 0.03);
+          --green: #4ade80;
+          --green-deep: #86efac;
+          --teal: #2dd4bf;
+          --ink: #ecfdf5;
+          --muted: #9bc4a8;
+          --line: rgba(255, 255, 255, 0.1);
+          --line-strong: rgba(255, 255, 255, 0.16);
+          --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+          --shadow-sm: 0 8px 24px -14px rgba(0, 0, 0, 0.6);
+          --header-bg: rgba(5, 46, 22, 0.72);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+        background:
+          radial-gradient(70% 60% at 8% -5%, rgba(13, 148, 136, 0.18), transparent 60%),
+          radial-gradient(60% 55% at 95% 0%, rgba(22, 163, 74, 0.2), transparent 55%),
+          linear-gradient(170deg, var(--surface) 0%, var(--bg) 45%, var(--bg-2) 100%);
+        background-attachment: fixed;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+      }
+
+      a { color: var(--green-deep); }
+
+      .wrap {
+        width: min(1140px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      /* ---------- Header ---------- */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: saturate(160%) blur(14px);
+        -webkit-backdrop-filter: saturate(160%) blur(14px);
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        font-size: 1.18rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+      }
+
+      .brand svg { display: block; filter: drop-shadow(0 4px 8px rgba(22, 163, 74, 0.4)); }
+
+      .nav-links {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        font-weight: 650;
+        font-size: 0.94rem;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 10px;
+        transition: color 160ms ease, background 160ms ease;
+      }
+
+      .nav-links a:hover { color: var(--ink); background: var(--surface); }
+
+      .nav-cta {
+        color: #fff !important;
+        background: linear-gradient(135deg, #166534, #16a34a);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .nav-cta:hover { filter: brightness(1.08); background: linear-gradient(135deg, #166534, #16a34a) !important; }
+
+      @media (max-width: 620px) {
+        .nav-text { display: none; }
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        padding: 60px 0 28px;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 44px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        padding: 6px 13px;
+        background: var(--surface);
+        color: var(--green-deep);
+        font-size: 0.78rem;
+        font-weight: 750;
+        letter-spacing: 0.01em;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .eyebrow .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--teal);
+        box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.22);
+        animation: dotPulse 2.4s ease-in-out infinite;
+      }
+
+      @keyframes dotPulse {
+        0%, 100% { box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.22); }
+        50%       { box-shadow: 0 0 0 9px rgba(13, 148, 136, 0.07); }
+      }
+
+      h1 {
+        margin: 18px 0 0;
+        max-width: 14ch;
+        font-size: clamp(2.6rem, 6.2vw, 4.6rem);
+        line-height: 0.96;
+        letter-spacing: -0.03em;
+        font-weight: 820;
+      }
+
+      .grad {
+        background: linear-gradient(120deg, var(--green-deep), var(--green) 55%, var(--teal));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .sub {
+        margin: 20px 0 0;
+        max-width: 52ch;
+        color: var(--muted);
+        font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+        line-height: 1.62;
+      }
+
+      .cta {
+        margin-top: 30px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 50px;
+        border-radius: 14px;
+        padding: 13px 22px;
+        font-weight: 750;
+        font-size: 1rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+      }
+
+      .btn:hover { transform: translateY(-2px); }
+      .btn:active { transform: translateY(0); }
+
+      .btn-primary {
+        color: #fff;
+        background: linear-gradient(135deg, #166534, #16a34a);
+        box-shadow: var(--shadow);
+      }
+      .btn-primary:hover { filter: brightness(1.08); }
+
+      .btn-secondary {
+        color: var(--ink);
+        background: var(--surface);
+        border-color: var(--line-strong);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .trust {
+        margin-top: 22px;
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+
+      .trust span { display: inline-flex; align-items: center; gap: 7px; }
+      .trust svg { color: var(--teal); flex: none; }
+
+      /* ---------- Phone mockup ---------- */
+      .phone-stage {
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+
+      .phone {
+        position: relative;
+        width: min(300px, 80%);
+        aspect-ratio: 9 / 18.5;
+        border-radius: 44px;
+        padding: 12px;
+        background: linear-gradient(160deg, #1a3d28, #0a1f14);
+        box-shadow:
+          var(--shadow),
+          inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+        animation: phoneFloat 6s ease-in-out infinite;
+      }
+
+      @keyframes phoneFloat {
+        0%, 100% { transform: translateY(0); }
+        50%       { transform: translateY(-10px); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .phone { animation: none; }
+        .eyebrow .dot { animation: none; }
+        html { scroll-behavior: auto; }
+      }
+
+      .phone::before {
+        content: "";
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 96px;
+        height: 26px;
+        background: #0a1f14;
+        border-radius: 0 0 16px 16px;
+        z-index: 3;
+      }
+
+      .screen {
+        position: relative;
+        height: 100%;
+        border-radius: 34px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #e8f5ed 0%, #c8e6d2 100%);
+        display: flex;
+        flex-direction: column;
+        padding: 40px 14px 16px;
+        gap: 10px;
+      }
+
+      .map-bg {
+        position: absolute;
+        left: 0; right: 0; top: 0; bottom: 0;
+        background: linear-gradient(180deg, #dff0e8 0%, #c2dece 100%);
+        z-index: 0;
+      }
+
+      .map-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(22, 163, 74, 0.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(22, 163, 74, 0.12) 1px, transparent 1px);
+        background-size: 22px 22px;
+        z-index: 1;
+      }
+
+      .screen > * { position: relative; z-index: 2; }
+
+      .s-chip {
+        align-self: flex-start;
+        background: rgba(255, 255, 255, 0.92);
+        color: #166534;
+        font-size: 0.68rem;
+        font-weight: 800;
+        padding: 5px 11px;
+        border-radius: 999px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+      .pin-area {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .s-card {
+        background: rgba(255, 255, 255, 0.94);
+        border-radius: 12px;
+        padding: 10px 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .s-card + .s-card { margin-top: -2px; }
+
+      .s-card strong { display: block; color: #0a2018; font-size: 0.84rem; font-weight: 750; }
+      .s-card span { color: #3d6b52; font-size: 0.72rem; }
+
+      .s-score {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 3px;
+      }
+
+      .s-score .sdot { width: 7px; height: 7px; border-radius: 50%; background: #16a34a; flex-shrink: 0; }
+      .s-score em { color: #16a34a; font-size: 0.68rem; font-weight: 800; font-style: normal; }
+
+      /* ---------- Sections ---------- */
+      .section { padding: 40px 0; }
+
+      .section-head { max-width: 56ch; margin-bottom: 28px; }
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+        letter-spacing: -0.02em;
+        font-weight: 800;
+      }
+      .section-head p { margin: 12px 0 0; color: var(--muted); font-size: 1.05rem; }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        background: var(--surface);
+        box-shadow: var(--shadow-sm);
+        transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+        border-color: var(--line-strong);
+      }
+
+      .card .ic {
+        width: 46px;
+        height: 46px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: linear-gradient(135deg, #166534, #16a34a);
+        margin-bottom: 14px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card h3 { margin: 0 0 7px; font-size: 1.12rem; font-weight: 750; }
+      .card p { margin: 0; color: var(--muted); font-size: 0.96rem; line-height: 1.55; }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 12px;
+        background: rgba(22, 163, 74, 0.1);
+        border: 1px solid rgba(22, 163, 74, 0.22);
+        color: var(--green-deep);
+        font-size: 0.74rem;
+        font-weight: 750;
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+
+      /* ---------- How it works ---------- */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        counter-reset: step;
+      }
+
+      .step {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        background: var(--surface-2);
+      }
+
+      .step::before {
+        counter-increment: step;
+        content: counter(step);
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        font-weight: 800;
+        color: var(--green-deep);
+        background: var(--surface);
+        border: 1px solid var(--line-strong);
+        margin-bottom: 14px;
+      }
+
+      .step h3 { margin: 0 0 6px; font-size: 1.08rem; font-weight: 750; }
+      .step p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+      /* ---------- Support CTA ---------- */
+      .support {
+        border: 1px solid var(--line-strong);
+        border-radius: 24px;
+        padding: 40px;
+        background:
+          radial-gradient(80% 120% at 100% 0%, rgba(13, 148, 136, 0.16), transparent 60%),
+          var(--surface);
+        box-shadow: var(--shadow-sm);
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .support h2 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.02em; }
+      .support p { margin: 12px 0 0; color: var(--muted); font-size: 1.02rem; }
+      .support .actions { display: flex; flex-direction: column; gap: 10px; }
+      .support a.line {
+        color: var(--muted);
+        font-weight: 750;
+        text-decoration: none;
+        transition: color 160ms ease;
+      }
+      .support a.line:hover { color: var(--ink); }
+
+      /* ---------- Footer ---------- */
+      footer { padding: 30px 0 44px; color: var(--muted); }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        border-top: 1px solid var(--line);
+        padding-top: 24px;
+        font-size: 0.92rem;
+      }
+      .footer-links { display: inline-flex; gap: 8px; flex-wrap: wrap; }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 650;
+        padding: 6px 10px;
+        border-radius: 8px;
+        transition: color 160ms ease, background 160ms ease;
+      }
+      .footer-links a:hover { color: var(--ink); background: var(--surface); }
+
+      :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 6px; }
+
+      @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 44px; }
+        .phone-stage { order: -1; }
+        .phone { width: min(280px, 70%); }
+        .features, .steps { grid-template-columns: 1fr; }
+        .support { grid-template-columns: 1fr; padding: 30px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap topbar">
+        <a class="brand" href="./" aria-label="FamilyStop home">
+          <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+            <defs>
+              <linearGradient id="pin" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#166534" />
+                <stop offset="1" stop-color="#16a34a" />
+              </linearGradient>
+            </defs>
+            <path d="M16 2C10.5 2 6 6.5 6 12c0 8 10 18 10 18s10-10 10-18c0-5.5-4.5-10-10-10Z" fill="url(#pin)" />
+            <path d="M11 12l3 3 7-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+          <span>FamilyStop</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#support">Support</a>
+          <a class="nav-cta" href="mailto:randyventures06@gmail.com?subject=FamilyStop%20Support">
+            Contact<span class="nav-text">&nbsp;us</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="wrap hero">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> iOS app · coming soon</span>
+          <h1>Find the stop your family needs. <span class="grad">Right now.</span></h1>
+          <p class="sub">
+            FamilyStop maps verified family restrooms, changing tables, nursing rooms, and playgrounds — so every trip goes smoother, from quick errands to long road trips.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="mailto:randyventures06@gmail.com?subject=FamilyStop%20Support">
+              Contact support
+            </a>
+            <a class="btn btn-secondary" href="privacy/">Privacy Policy</a>
+          </div>
+          <div class="trust">
+            <span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Verified by families
+            </span>
+            <span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              No data sold
+            </span>
+            <span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Offline access (Plus)
+            </span>
+          </div>
+        </div>
+
+        <div class="phone-stage">
+          <div class="phone" aria-label="FamilyStop app preview — map showing nearby family stops" role="img">
+            <div class="screen">
+              <div class="map-bg" aria-hidden="true"></div>
+              <div class="map-grid" aria-hidden="true"></div>
+              <span class="s-chip">Nearby stops</span>
+              <div class="pin-area" aria-hidden="true">
+                <svg viewBox="0 0 190 150" style="width:100%;max-height:140px">
+                  <!-- Road lines -->
+                  <path d="M0 76 190 76" stroke="rgba(180,220,190,0.8)" stroke-width="18" />
+                  <path d="M95 0 95 150" stroke="rgba(180,220,190,0.6)" stroke-width="12" />
+                  <!-- Road center lines -->
+                  <path d="M0 76 190 76" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-dasharray="12 10" />
+                  <!-- Green pin (family restroom) -->
+                  <g transform="translate(44,34)">
+                    <path d="M13 0C8.3 0 4.5 4 4.5 9c0 6.3 8.5 14.5 8.5 14.5S21.5 15.3 21.5 9C21.5 4 17.7 0 13 0Z" fill="#16a34a" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.2))"/>
+                    <path d="M9.5 9l2.5 2.5 5.5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </g>
+                  <!-- Teal pin (nursing room) -->
+                  <g transform="translate(122,48)">
+                    <path d="M11 0C7 0 3.8 3.4 3.8 7.6c0 5.3 7.2 12.4 7.2 12.4s7.2-7.1 7.2-12.4C18.2 3.4 15 0 11 0Z" fill="#0d9488" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.2))"/>
+                    <circle cx="11" cy="7.5" r="3" fill="white" opacity="0.9"/>
+                  </g>
+                  <!-- Muted pin -->
+                  <g transform="translate(68,90)">
+                    <path d="M10 0C6.5 0 3.5 3 3.5 6.8c0 4.8 6.5 11 6.5 11s6.5-6.2 6.5-11C16.5 3 13.5 0 10 0Z" fill="#16a34a" opacity="0.55"/>
+                    <circle cx="10" cy="6.5" r="2.5" fill="white" opacity="0.8"/>
+                  </g>
+                  <!-- User location pulse -->
+                  <circle cx="96" cy="76" r="14" fill="rgba(22,163,74,0.15)"/>
+                  <circle cx="96" cy="76" r="8" fill="rgba(22,163,74,0.2)"/>
+                  <circle cx="96" cy="76" r="5" fill="#166534"/>
+                  <circle cx="96" cy="76" r="3" fill="white"/>
+                </svg>
+              </div>
+              <div class="s-card">
+                <strong>Target — SOCO</strong>
+                <span>Family restroom · changing table</span>
+                <div class="s-score">
+                  <span class="sdot"></span>
+                  <em>FamilyScore 9.2 · 0.3 mi</em>
+                </div>
+              </div>
+              <div class="s-card">
+                <strong>Whole Foods Market</strong>
+                <span>Nursing room · stroller-friendly</span>
+                <div class="s-score">
+                  <span class="sdot"></span>
+                  <em>FamilyScore 8.7 · 0.6 mi</em>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section" id="features">
+        <div class="section-head">
+          <h2>Built for every stop on the road</h2>
+          <p>From a quick errand to a cross-country drive, FamilyStop has the stops you need — verified by parents who've been there.</p>
+        </div>
+        <div class="features">
+          <article class="card">
+            <div class="ic" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3>Find nearby stops</h3>
+            <p>Family restrooms, changing tables, nursing rooms, and playgrounds — ranked by FamilyScore, the community rating built for parents.</p>
+          </article>
+          <article class="card">
+            <div class="ic" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <h3>Emergency mode</h3>
+            <p>Tap Emergency Mode for an instant list of the closest stops. No searching needed — just the nearest help, right now.</p>
+          </article>
+          <article class="card">
+            <div class="ic" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/><circle cx="8" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <h3>Road trip planning</h3>
+            <p>Build a family-friendly route with verified stops already mapped along the way. Plan once, drive without stress.</p>
+            <span class="badge">FamilyStop Plus</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="wrap section" id="how">
+        <div class="section-head">
+          <h2>How it works</h2>
+          <p>Open the app, find a stop, and go — it is that simple.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <h3>Open the map</h3>
+            <p>See verified stops near you ranked by FamilyScore — a composite of amenities, cleanliness, and community reviews from other parents.</p>
+          </div>
+          <div class="step">
+            <h3>Tap a stop</h3>
+            <p>Check amenities, hours, and reviews in seconds. See family restrooms, changing tables, nursing rooms, and accessibility info at a glance.</p>
+          </div>
+          <div class="step">
+            <h3>Save and go</h3>
+            <p>Bookmark your favorite stops, plan road trips with verified stops along the route, and share itineraries with the whole family.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section" id="support">
+        <div class="support">
+          <div>
+            <h2>Need a hand?</h2>
+            <p>
+              For account, billing, technical, or privacy questions, reach out any time. We read every
+              message and reply as quickly as we can.
+            </p>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="mailto:randyventures06@gmail.com?subject=FamilyStop%20Support">
+              Email support
+            </a>
+            <a class="line" href="mailto:randyventures06@gmail.com">randyventures06@gmail.com</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <div class="footer-inner">
+        <div>&copy; 2026 FamilyStop by Randy Ventures</div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="privacy/">Privacy Policy</a>
+          <a href="terms/">Terms of Use</a>
+          <a href="mailto:randyventures06@gmail.com">Support</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

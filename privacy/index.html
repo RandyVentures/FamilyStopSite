@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FamilyStop — Privacy Policy</title>
+    <meta name="description" content="Privacy Policy for FamilyStop, including location data, account identifiers, purchases, user content, and diagnostics." />
+    <meta name="theme-color" content="#16a34a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#052e16" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2C10.5 2 6 6.5 6 12c0 8 10 18 10 18s10-10 10-18c0-5.5-4.5-10-10-10Z' fill='%2316a34a'/%3E%3Cpath d='M11 12l3 3 7-6' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --bg: #f4fbf7;
+        --surface: #ffffff;
+        --green: #16a34a;
+        --green-deep: #166534;
+        --teal: #0d9488;
+        --ink: #0a2018;
+        --muted: #4b6b52;
+        --line: rgba(22, 101, 52, 0.14);
+        --line-strong: rgba(22, 101, 52, 0.22);
+        --surface-doc: rgba(255, 255, 255, 0.7);
+        --header-bg: rgba(244, 251, 247, 0.76);
+        --shadow-sm: 0 8px 24px -16px rgba(10, 60, 32, 0.45);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #052e16;
+          --surface: rgba(255, 255, 255, 0.05);
+          --green: #4ade80;
+          --green-deep: #86efac;
+          --teal: #2dd4bf;
+          --ink: #ecfdf5;
+          --muted: #9bc4a8;
+          --line: rgba(255, 255, 255, 0.1);
+          --line-strong: rgba(255, 255, 255, 0.16);
+          --surface-doc: rgba(255, 255, 255, 0.04);
+          --header-bg: rgba(5, 46, 22, 0.76);
+          --shadow-sm: 0 8px 24px -14px rgba(0, 0, 0, 0.6);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+        background:
+          radial-gradient(circle at 12% 0%, rgba(13, 148, 136, 0.14), transparent 24rem),
+          radial-gradient(circle at 88% 0%, rgba(22, 163, 74, 0.14), transparent 24rem),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: var(--green-deep); }
+
+      .wrap { width: min(860px, calc(100% - 36px)); margin: 0 auto; }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(160%);
+      }
+
+      .topbar {
+        min-height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.05rem;
+      }
+
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.92rem;
+        min-height: 38px;
+        padding: 0 12px;
+        border-radius: 999px;
+        transition: color 160ms ease, background 160ms ease;
+      }
+      .back:hover { color: var(--ink); background: var(--surface); }
+
+      main { padding: 44px 0 26px; }
+
+      .meta {
+        display: inline-flex;
+        color: var(--green-deep);
+        border: 1px solid rgba(22, 163, 74, 0.32);
+        background: rgba(22, 163, 74, 0.08);
+        border-radius: 999px;
+        padding: 7px 13px;
+        font-size: 0.82rem;
+        font-weight: 850;
+      }
+
+      h1 {
+        margin: 18px 0 12px;
+        font-size: clamp(2.2rem, 7vw, 4rem);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        font-weight: 820;
+      }
+
+      .lede { max-width: 68ch; margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+      .toc {
+        margin: 28px 0;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+      }
+
+      .toc strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .toc ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px 22px;
+      }
+
+      .toc a { color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+      .toc a:hover { color: var(--green-deep); }
+
+      article {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface-doc);
+        padding: clamp(22px, 5vw, 42px);
+      }
+
+      section { scroll-margin-top: 86px; }
+      section + section { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--line); }
+
+      h2 { margin: 0 0 10px; font-size: 1.22rem; line-height: 1.2; font-weight: 750; }
+
+      p, li { color: var(--muted); }
+      p { margin: 0 0 10px; }
+      p:last-child { margin-bottom: 0; }
+      ul { margin: 10px 0 0; padding-left: 20px; }
+      li { margin-bottom: 7px; }
+
+      footer { padding: 28px 0 44px; color: var(--muted); }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        border-top: 1px solid var(--line);
+        padding-top: 22px;
+        font-size: 0.92rem;
+      }
+      .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 700;
+        padding: 6px 10px;
+        border-radius: 8px;
+        transition: color 160ms ease, background 160ms ease;
+      }
+      .footer-links a:hover { color: var(--ink); background: var(--surface); }
+
+      :focus-visible { outline: 2px solid var(--green); outline-offset: 4px; border-radius: 8px; }
+
+      @media (max-width: 640px) {
+        .toc ol { grid-template-columns: 1fr; }
+        .back span { display: none; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap topbar">
+        <a class="brand" href="../" aria-label="FamilyStop home">
+          <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true">
+            <defs>
+              <linearGradient id="pin" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#166534" />
+                <stop offset="1" stop-color="#16a34a" />
+              </linearGradient>
+            </defs>
+            <path d="M16 2C10.5 2 6 6.5 6 12c0 8 10 18 10 18s10-10 10-18c0-5.5-4.5-10-10-10Z" fill="url(#pin)" />
+            <path d="M11 12l3 3 7-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+          <span>FamilyStop</span>
+        </a>
+        <a class="back" href="../">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Back to home</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <span class="meta">Last updated: June 19, 2026</span>
+        <h1>Privacy Policy</h1>
+        <p class="lede">
+          This Privacy Policy explains how FamilyStop handles information when you use the app, website, purchases, support, and related services operated by Randy Ventures.
+        </p>
+
+        <nav class="toc" aria-label="Contents">
+          <strong>Contents</strong>
+          <ol>
+            <li><a href="#who">Who we are</a></li>
+            <li><a href="#info">Information we handle</a></li>
+            <li><a href="#use">How we use information</a></li>
+            <li><a href="#third-party">Third-party services</a></li>
+            <li><a href="#storage">Storage and sharing</a></li>
+            <li><a href="#choices">Your choices</a></li>
+            <li><a href="#children">Children</a></li>
+            <li><a href="#changes">Changes</a></li>
+          </ol>
+        </nav>
+
+        <article>
+          <section id="who">
+            <h2>Who we are</h2>
+            <p>
+              FamilyStop is operated by Randy Ventures. Questions about this policy can be sent to
+              <a href="mailto:randyventures06@gmail.com">randyventures06@gmail.com</a>.
+            </p>
+          </section>
+
+          <section id="info">
+            <h2>Information we handle</h2>
+            <p>FamilyStop handles the following categories of information depending on how you use the app:</p>
+            <ul>
+              <li>
+                <strong>Precise location.</strong> When you use Explore, Emergency Mode, or road trip features, the app sends your device coordinates to the FamilyStop API to find and rank nearby stops. Location is linked to your active session token and is used only to fulfill the request — it is not stored as a history log.
+              </li>
+              <li>
+                <strong>Account and session identifiers.</strong> When you first open the app, a guest session token is assigned. If you sign in with your email, an authenticated session token is issued. These identifiers are used to associate saved places, trips, reviews, verifications, and your profile with your account.
+              </li>
+              <li>
+                <strong>User content.</strong> Reviews you write, verifications you submit for place amenities, places you save, and road trip itineraries you create are stored server-side and linked to your account. Submitted reviews and verifications may be visible to other users as part of the FamilyScore system.
+              </li>
+              <li>
+                <strong>Purchases.</strong> If you subscribe to FamilyStop Plus, purchase information is processed by Apple and managed through RevenueCat. We receive entitlement status (whether you hold a Plus subscription) to unlock premium features. Payment details are handled entirely by Apple and are never seen by us.
+              </li>
+              <li>
+                <strong>Diagnostics.</strong> The app and API may produce diagnostic information such as error logs, crash reports, and performance signals when services are initialized or errors occur. This information is used to maintain app quality and fix bugs.
+              </li>
+              <li>
+                <strong>Support communications.</strong> When you contact support by email, we handle the information you include — such as your email address, message, device model, iOS version, or screenshots — to respond to and resolve your request.
+              </li>
+            </ul>
+          </section>
+
+          <section id="use">
+            <h2>How we use information</h2>
+            <ul>
+              <li>To find and rank family-friendly stops near your location.</li>
+              <li>To provide Emergency Mode with the nearest available stops.</li>
+              <li>To store your saved places, trips, reviews, and verifications.</li>
+              <li>To calculate and update FamilyScore ratings from community verifications.</li>
+              <li>To verify your FamilyStop Plus entitlement and unlock premium features.</li>
+              <li>To send sign-in verification codes to your email address when you choose email authentication.</li>
+              <li>To respond to support requests and troubleshoot issues.</li>
+              <li>To maintain app functionality, detect errors, and comply with App Store requirements.</li>
+            </ul>
+          </section>
+
+          <section id="third-party">
+            <h2>Third-party services</h2>
+            <p>FamilyStop uses the following third-party services to operate:</p>
+            <ul>
+              <li>
+                <strong>Mapbox.</strong> Used for map tiles, geocoding, and route calculation for road trip planning. Mapbox receives location and search queries when you use map features.
+              </li>
+              <li>
+                <strong>RevenueCat.</strong> Used to manage FamilyStop Plus subscription entitlements. RevenueCat verifies purchase status and sends webhooks to the API when subscriptions renew, expire, or are cancelled.
+              </li>
+              <li>
+                <strong>Apple.</strong> Processes App Store payments and in-app purchase billing. The iOS platform also handles location permissions, Screen Time integration where applicable, and app distribution.
+              </li>
+              <li>
+                <strong>Resend.</strong> Used to send transactional sign-in verification codes to your email address when you choose email authentication. Resend handles outbound email delivery.
+              </li>
+            </ul>
+            <p>We do not control third-party services and cannot guarantee their availability. Each third party operates under its own privacy policy.</p>
+          </section>
+
+          <section id="storage">
+            <h2>Storage and sharing</h2>
+            <p>
+              Your account data, saved places, trips, reviews, and verifications are stored server-side to enable the app to work across devices and sessions. Precise location is transmitted for each request but is not stored as a location history.
+            </p>
+            <p>
+              We do not sell your personal information. Information may be shared with Apple, Mapbox, RevenueCat, and Resend only as necessary for app functionality as described in this policy.
+            </p>
+            <p>
+              Community-submitted reviews and verifications may be visible to other FamilyStop users as part of the FamilyScore system.
+            </p>
+          </section>
+
+          <section id="choices">
+            <h2>Your choices</h2>
+            <ul>
+              <li>You can control location access through iOS Settings &gt; Privacy &amp; Security &gt; Location Services.</li>
+              <li>You can use the app as a guest without providing an email address. Some features such as saved places and trips require a session token.</li>
+              <li>You can manage or cancel your FamilyStop Plus subscription through your Apple ID subscription settings.</li>
+              <li>You can restore purchases from inside the app.</li>
+              <li>You can contact support to ask privacy questions, request data deletion, or get help with your account.</li>
+              <li>Deleting the app removes locally cached data from your device, subject to iOS backup behavior. Server-side account data is retained until you request deletion.</li>
+            </ul>
+          </section>
+
+          <section id="children">
+            <h2>Children</h2>
+            <p>
+              FamilyStop is designed to be used by parents and caregivers. The app is not directed to children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child has provided personal information through the app, please contact us so we can remove it.
+            </p>
+          </section>
+
+          <section id="changes">
+            <h2>Changes to this policy</h2>
+            <p>
+              We may update this Privacy Policy from time to time. When we do, we will post the updated version here and revise the date at the top of this page.
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="wrap">
+      <div class="footer-inner">
+        <div>&copy; 2026 FamilyStop by Randy Ventures</div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="../">Home</a>
+          <a href="../terms/">Terms of Use</a>
+          <a href="mailto:randyventures06@gmail.com">Support</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

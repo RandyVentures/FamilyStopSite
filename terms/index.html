@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FamilyStop — Terms of Use</title>
+    <meta name="description" content="Terms of Use for FamilyStop, including account, user content, FamilyStop Plus subscription, and service limitations." />
+    <meta name="theme-color" content="#16a34a" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#052e16" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2C10.5 2 6 6.5 6 12c0 8 10 18 10 18s10-10 10-18c0-5.5-4.5-10-10-10Z' fill='%2316a34a'/%3E%3Cpath d='M11 12l3 3 7-6' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --bg: #f4fbf7;
+        --surface: #ffffff;
+        --green: #16a34a;
+        --green-deep: #166534;
+        --teal: #0d9488;
+        --ink: #0a2018;
+        --muted: #4b6b52;
+        --line: rgba(22, 101, 52, 0.14);
+        --line-strong: rgba(22, 101, 52, 0.22);
+        --surface-doc: rgba(255, 255, 255, 0.7);
+        --header-bg: rgba(244, 251, 247, 0.76);
+        --shadow-sm: 0 8px 24px -16px rgba(10, 60, 32, 0.45);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #052e16;
+          --surface: rgba(255, 255, 255, 0.05);
+          --green: #4ade80;
+          --green-deep: #86efac;
+          --teal: #2dd4bf;
+          --ink: #ecfdf5;
+          --muted: #9bc4a8;
+          --line: rgba(255, 255, 255, 0.1);
+          --line-strong: rgba(255, 255, 255, 0.16);
+          --surface-doc: rgba(255, 255, 255, 0.04);
+          --header-bg: rgba(5, 46, 22, 0.76);
+          --shadow-sm: 0 8px 24px -14px rgba(0, 0, 0, 0.6);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+        background:
+          radial-gradient(circle at 12% 0%, rgba(13, 148, 136, 0.14), transparent 24rem),
+          radial-gradient(circle at 88% 0%, rgba(22, 163, 74, 0.14), transparent 24rem),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: var(--green-deep); }
+
+      .wrap { width: min(860px, calc(100% - 36px)); margin: 0 auto; }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(160%);
+      }
+
+      .topbar {
+        min-height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.05rem;
+      }
+
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.92rem;
+        min-height: 38px;
+        padding: 0 12px;
+        border-radius: 999px;
+        transition: color 160ms ease, background 160ms ease;
+      }
+      .back:hover { color: var(--ink); background: var(--surface); }
+
+      main { padding: 44px 0 26px; }
+
+      .meta {
+        display: inline-flex;
+        color: var(--green-deep);
+        border: 1px solid rgba(22, 163, 74, 0.32);
+        background: rgba(22, 163, 74, 0.08);
+        border-radius: 999px;
+        padding: 7px 13px;
+        font-size: 0.82rem;
+        font-weight: 850;
+      }
+
+      h1 {
+        margin: 18px 0 12px;
+        font-size: clamp(2.2rem, 7vw, 4rem);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        font-weight: 820;
+      }
+
+      .lede { max-width: 68ch; margin: 0; color: var(--muted); font-size: 1.05rem; }
+
+      .toc {
+        margin: 28px 0;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+      }
+
+      .toc strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .toc ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px 22px;
+      }
+
+      .toc a { color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+      .toc a:hover { color: var(--green-deep); }
+
+      article {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface-doc);
+        padding: clamp(22px, 5vw, 42px);
+      }
+
+      section { scroll-margin-top: 86px; }
+      section + section { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--line); }
+
+      h2 { margin: 0 0 10px; font-size: 1.22rem; line-height: 1.2; font-weight: 750; }
+
+      p, li { color: var(--muted); }
+      p { margin: 0 0 10px; }
+      p:last-child { margin-bottom: 0; }
+      ul { margin: 10px 0 0; padding-left: 20px; }
+      li { margin-bottom: 7px; }
+
+      footer { padding: 28px 0 44px; color: var(--muted); }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        border-top: 1px solid var(--line);
+        padding-top: 22px;
+        font-size: 0.92rem;
+      }
+      .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 700;
+        padding: 6px 10px;
+        border-radius: 8px;
+        transition: color 160ms ease, background 160ms ease;
+      }
+      .footer-links a:hover { color: var(--ink); background: var(--surface); }
+
+      :focus-visible { outline: 2px solid var(--green); outline-offset: 4px; border-radius: 8px; }
+
+      @media (max-width: 640px) {
+        .toc ol { grid-template-columns: 1fr; }
+        .back span { display: none; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap topbar">
+        <a class="brand" href="../" aria-label="FamilyStop home">
+          <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true">
+            <defs>
+              <linearGradient id="pin" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#166534" />
+                <stop offset="1" stop-color="#16a34a" />
+              </linearGradient>
+            </defs>
+            <path d="M16 2C10.5 2 6 6.5 6 12c0 8 10 18 10 18s10-10 10-18c0-5.5-4.5-10-10-10Z" fill="url(#pin)" />
+            <path d="M11 12l3 3 7-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          </svg>
+          <span>FamilyStop</span>
+        </a>
+        <a class="back" href="../">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Back to home</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <span class="meta">Last updated: June 19, 2026</span>
+        <h1>Terms of Use</h1>
+        <p class="lede">
+          These Terms of Use govern your use of the FamilyStop app, website, purchases, support, and related services operated by Randy Ventures.
+        </p>
+
+        <nav class="toc" aria-label="Contents">
+          <strong>Contents</strong>
+          <ol>
+            <li><a href="#acceptance">Acceptance</a></li>
+            <li><a href="#service">Service description</a></li>
+            <li><a href="#account">Account and authentication</a></li>
+            <li><a href="#subscription">FamilyStop Plus</a></li>
+            <li><a href="#content">User content</a></li>
+            <li><a href="#acceptable">Acceptable use</a></li>
+            <li><a href="#third-party">Third-party services</a></li>
+            <li><a href="#disclaimers">Disclaimers</a></li>
+            <li><a href="#liability">Limitation of liability</a></li>
+            <li><a href="#changes">Changes</a></li>
+          </ol>
+        </nav>
+
+        <article>
+          <section id="acceptance">
+            <h2>Acceptance</h2>
+            <p>
+              By downloading, installing, or using FamilyStop, you agree to these Terms of Use. If you do not agree, do not use the app or related services. Apple's Standard End User License Agreement also applies to the iOS app: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Apple Standard EULA</a>.
+            </p>
+          </section>
+
+          <section id="service">
+            <h2>Service description</h2>
+            <p>
+              FamilyStop helps families locate family-friendly stops including family restrooms, changing tables, nursing rooms, playgrounds, and stroller-friendly locations. Stop data is sourced from community verifications and public information. We do not guarantee the accuracy, availability, cleanliness, or current status of any listed stop. Always confirm conditions on arrival.
+            </p>
+            <p>
+              Features, content, stop data, FamilyScore ratings, pricing, and availability may change over time. Road trip suggestions are based on available verified data and may not reflect real-time conditions.
+            </p>
+          </section>
+
+          <section id="account">
+            <h2>Account and authentication</h2>
+            <ul>
+              <li>A guest session is created automatically when you first open the app. No personal information is required to browse stops.</li>
+              <li>To save places, submit reviews, verify stops, or create road trips, you may sign in with your email address. We send a verification code to confirm your identity.</li>
+              <li>You are responsible for keeping your account secure. Do not share session tokens or sign-in codes.</li>
+              <li>We reserve the right to suspend or terminate accounts that violate these Terms.</li>
+            </ul>
+          </section>
+
+          <section id="subscription">
+            <h2>FamilyStop Plus</h2>
+            <ul>
+              <li>FamilyStop Plus is a subscription that unlocks premium features including offline access, road trip planning, advanced filters, FamilyScore sorting, and premium route suggestions.</li>
+              <li>Plus is available as a weekly plan ($4.99/week) or an annual plan ($29.99/year). Pricing and contents are shown in the app before purchase.</li>
+              <li>Subscriptions include a 14-day free trial for new subscribers. The trial converts automatically to a paid subscription unless cancelled before the trial ends.</li>
+              <li>Billing is processed through Apple. Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current period.</li>
+              <li>Refunds, billing disputes, and subscription management are handled by Apple under App Store rules. You can manage or cancel your subscription through your Apple ID subscription settings.</li>
+              <li>Virtual features and content unlocked by Plus have no real-world cash value and cannot be redeemed for money.</li>
+            </ul>
+          </section>
+
+          <section id="content">
+            <h2>User content</h2>
+            <ul>
+              <li>You may submit reviews, amenity verifications, and other content to help the FamilyStop community. By submitting content, you grant Randy Ventures a non-exclusive, royalty-free license to use, display, and distribute that content within the app and service.</li>
+              <li>You are responsible for the accuracy of verifications and reviews you submit. Do not submit false, misleading, or harmful information.</li>
+              <li>We may remove content that violates these Terms or that is otherwise inappropriate, inaccurate, or harmful.</li>
+              <li>FamilyScore ratings are calculated from community verifications and are subject to change as new information is submitted.</li>
+            </ul>
+          </section>
+
+          <section id="acceptable">
+            <h2>Acceptable use</h2>
+            <ul>
+              <li>You may not use FamilyStop in a way that violates applicable law or Apple platform rules.</li>
+              <li>You may not attempt to abuse, exploit, reverse engineer, interfere with, or bypass app systems, purchases, entitlement checks, or rating mechanisms.</li>
+              <li>You may not submit spam, false verifications, fake reviews, or content designed to manipulate FamilyScore rankings.</li>
+              <li>You are responsible for your own device, account, network, and App Store settings.</li>
+            </ul>
+          </section>
+
+          <section id="third-party">
+            <h2>Third-party services</h2>
+            <p>
+              FamilyStop uses Apple services, Mapbox, RevenueCat, and Resend for app functionality, mapping, purchases, and email authentication. We do not control third-party services and cannot guarantee their uninterrupted operation. Each third party operates under its own terms of service and privacy policy.
+            </p>
+          </section>
+
+          <section id="disclaimers">
+            <h2>Disclaimers</h2>
+            <p>
+              FamilyStop is provided on an "as is" and "as available" basis. We do not guarantee that stop data is accurate, current, or complete. Stop conditions, hours, amenities, and accessibility may change without notice. Always verify stop details upon arrival.
+            </p>
+            <p>
+              We do not guarantee that the app, map, road trip planning, purchases, account features, or services will be uninterrupted, error-free, or available at all times.
+            </p>
+          </section>
+
+          <section id="liability">
+            <h2>Limitation of liability</h2>
+            <p>
+              To the maximum extent permitted by law, Randy Ventures will not be liable for indirect, incidental, consequential, special, or punitive damages arising from your use of FamilyStop, including reliance on stop data, map routing, community reviews, or subscription features.
+            </p>
+          </section>
+
+          <section id="changes">
+            <h2>Changes to these terms</h2>
+            <p>
+              We may update these Terms of Use from time to time. When we do, we will post the updated version here and revise the date at the top of this page. Continued use of FamilyStop after changes take effect constitutes acceptance of the updated terms.
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="wrap">
+      <div class="footer-inner">
+        <div>&copy; 2026 FamilyStop by Randy Ventures</div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="../">Home</a>
+          <a href="../privacy/">Privacy Policy</a>
+          <a href="mailto:randyventures06@gmail.com">Support</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
