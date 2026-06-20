@@ -293,77 +293,17 @@
         z-index: 3;
       }
 
-      .screen {
-        position: relative;
-        height: 100%;
+      .app-screenshot {
+        position: absolute;
+        inset: 12px;
+        width: calc(100% - 24px);
+        height: calc(100% - 24px);
+        object-fit: cover;
+        object-position: top center;
         border-radius: 34px;
-        overflow: hidden;
-        background: linear-gradient(180deg, #e8f5ed 0%, #c8e6d2 100%);
-        display: flex;
-        flex-direction: column;
-        padding: 40px 14px 16px;
-        gap: 10px;
+        display: block;
       }
 
-      .map-bg {
-        position: absolute;
-        left: 0; right: 0; top: 0; bottom: 0;
-        background: linear-gradient(180deg, #dff0e8 0%, #c2dece 100%);
-        z-index: 0;
-      }
-
-      .map-grid {
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(22, 163, 74, 0.12) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(22, 163, 74, 0.12) 1px, transparent 1px);
-        background-size: 22px 22px;
-        z-index: 1;
-      }
-
-      .screen > * { position: relative; z-index: 2; }
-
-      .s-chip {
-        align-self: flex-start;
-        background: rgba(255, 255, 255, 0.92);
-        color: #166534;
-        font-size: 0.68rem;
-        font-weight: 800;
-        padding: 5px 11px;
-        border-radius: 999px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-      }
-
-      .pin-area {
-        flex: 1;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .s-card {
-        background: rgba(255, 255, 255, 0.94);
-        border-radius: 12px;
-        padding: 10px 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-      }
-
-      .s-card + .s-card { margin-top: -2px; }
-
-      .s-card strong { display: block; color: #0a2018; font-size: 0.84rem; font-weight: 750; }
-      .s-card span { color: #3d6b52; font-size: 0.72rem; }
-
-      .s-score {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        margin-top: 3px;
-      }
-
-      .s-score .sdot { width: 7px; height: 7px; border-radius: 50%; background: #16a34a; flex-shrink: 0; }
-      .s-score em { color: #16a34a; font-size: 0.68rem; font-weight: 800; font-style: normal; }
 
       /* ---------- Sections ---------- */
       .section { padding: 40px 0; }
@@ -578,57 +518,8 @@
         </div>
 
         <div class="phone-stage">
-          <div class="phone" aria-label="FamilyStop app preview — map showing nearby family stops" role="img">
-            <div class="screen">
-              <div class="map-bg" aria-hidden="true"></div>
-              <div class="map-grid" aria-hidden="true"></div>
-              <span class="s-chip">Nearby stops</span>
-              <div class="pin-area" aria-hidden="true">
-                <svg viewBox="0 0 190 150" style="width:100%;max-height:140px">
-                  <!-- Road lines -->
-                  <path d="M0 76 190 76" stroke="rgba(180,220,190,0.8)" stroke-width="18" />
-                  <path d="M95 0 95 150" stroke="rgba(180,220,190,0.6)" stroke-width="12" />
-                  <!-- Road center lines -->
-                  <path d="M0 76 190 76" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-dasharray="12 10" />
-                  <!-- Green pin (family restroom) -->
-                  <g transform="translate(44,34)">
-                    <path d="M13 0C8.3 0 4.5 4 4.5 9c0 6.3 8.5 14.5 8.5 14.5S21.5 15.3 21.5 9C21.5 4 17.7 0 13 0Z" fill="#16a34a" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.2))"/>
-                    <path d="M9.5 9l2.5 2.5 5.5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                  </g>
-                  <!-- Teal pin (nursing room) -->
-                  <g transform="translate(122,48)">
-                    <path d="M11 0C7 0 3.8 3.4 3.8 7.6c0 5.3 7.2 12.4 7.2 12.4s7.2-7.1 7.2-12.4C18.2 3.4 15 0 11 0Z" fill="#0d9488" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.2))"/>
-                    <circle cx="11" cy="7.5" r="3" fill="white" opacity="0.9"/>
-                  </g>
-                  <!-- Muted pin -->
-                  <g transform="translate(68,90)">
-                    <path d="M10 0C6.5 0 3.5 3 3.5 6.8c0 4.8 6.5 11 6.5 11s6.5-6.2 6.5-11C16.5 3 13.5 0 10 0Z" fill="#16a34a" opacity="0.55"/>
-                    <circle cx="10" cy="6.5" r="2.5" fill="white" opacity="0.8"/>
-                  </g>
-                  <!-- User location pulse -->
-                  <circle cx="96" cy="76" r="14" fill="rgba(22,163,74,0.15)"/>
-                  <circle cx="96" cy="76" r="8" fill="rgba(22,163,74,0.2)"/>
-                  <circle cx="96" cy="76" r="5" fill="#166534"/>
-                  <circle cx="96" cy="76" r="3" fill="white"/>
-                </svg>
-              </div>
-              <div class="s-card">
-                <strong>Target — SOCO</strong>
-                <span>Family restroom · changing table</span>
-                <div class="s-score">
-                  <span class="sdot"></span>
-                  <em>FamilyScore 9.2 · 0.3 mi</em>
-                </div>
-              </div>
-              <div class="s-card">
-                <strong>Whole Foods Market</strong>
-                <span>Nursing room · stroller-friendly</span>
-                <div class="s-score">
-                  <span class="sdot"></span>
-                  <em>FamilyScore 8.7 · 0.6 mi</em>
-                </div>
-              </div>
-            </div>
+          <div class="phone" aria-label="FamilyStop app showing the Explore map with nearby family stops" role="img">
+            <img class="app-screenshot" src="screenshot.png" alt="FamilyStop explore screen showing a map of Austin with family stop filters and emergency mode button" />
           </div>
         </div>
       </section>
